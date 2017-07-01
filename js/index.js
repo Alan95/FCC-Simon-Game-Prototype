@@ -1,45 +1,42 @@
-var green = $(".green");
-var red = $(".red");
-var blue = $(".blue");
-var yellow = $(".yellow");
-var start = $(".start");
-var strict1 = $(".strict");
-var buttons = [0, 1, 2, 3];
-var gameArray = [];
-var playerArray = [];
-var round = 1;
-var greenie = "green";
-var redie = "red";
-var yellowi = "yellow";
-var bluei = "blue";
+let green = $(".green");
+let red = $(".red");
+let blue = $(".blue");
+let yellow = $(".yellow");
+let start = $(".start");
+let strict1 = $(".strict");
+let buttons = [0, 1, 2, 3];
+let gameArray = [];
+let playerArray = [];
+let round = 1;
+let greenie = "green";
+let redie = "red";
+let yellowi = "yellow";
+let bluei = "blue";
 var counter = 0;
-var options = 1;
+var maxColor = 1;
 var bassclicker = 0;
-var i = 0;
+let minColor = 0;
 var ux = 0;
 var failures = 0;
 
-var redAudio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
-var greenAudio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
-var yellowAudio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
-var blueAudio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
-var gameMode = false;
-var strict = false;
+let redAudio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3');
+let greenAudio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3');
+let yellowAudio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3');
+let blueAudio = new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3');
+let allAudio = [redAudio, greenAudio, yellowAudio, blueAudio];
+let gameMode = false;
+let strict = false;
 
-start.on("click", function() {
-    greenAudio.play();
+//Starting Gamemode
+
+start.click(() => {
+    let randItem = allAudio[Math.floor(Math.random() * allAudio.length)];
+    randItem.play();
     if (gameMode) {
-
-        setTimeout(reset(), 1000);
+      setTimeout(reset(), 1000);
     }
-
-
     gameMode = true;
-
-    greenAudio.play();
     gameRunner();
-
-
 });
 
 
@@ -60,71 +57,6 @@ strict1.on("click", function() {
 
 
 });
-
-
-
-
-function gameRunner() {
-    $(".display").text(round--);
-    round++;
-
-    if (round > 19) {
-        $(".display").text("You Won!");
-        reset();
-    }
-
-    playerArray = [];
-    console.log(i);
-    console.log(options);
-    while (i < options) {
-        var number = Math.floor(Math.random() * 4);
-
-        switch (number) {
-
-            case 0:
-                gameArray.push("green");
-                break;
-            case 1:
-                gameArray.push("red");
-                break;
-            case 2:
-                gameArray.push("blue");
-                break;
-            case 3:
-                gameArray.push("yellow");
-                break;
-
-        }
-        i++;
-    }
-
-
-    var m = 0;
-    starting(m);
-    options++;
-    ux = 0;
-
-    if (strict) {
-        failures = 1;
-    } else {
-        failures = 0;
-    }
-
-}
-
-function starting(counter) {
-    var current = gameArray[counter];
-    if (counter < gameArray.length) {
-        setTimeout(function() {
-            colorHandler(current);
-            counter++;
-            starting(counter);
-        }, 1500);
-    }
-
-}
-
-
 
 
 function colorHandler(color) {
@@ -311,22 +243,3 @@ $(".green").click(function() {
     }
 
 });
-
-
-
-
-function reset() {
-
-
-    strict = false;
-    round = 1;
-    counter = 0;
-    options = 1;
-    gameMode = true;
-    gameArray.length = 0;
-    i = 0;
-
-
-
-
-}
