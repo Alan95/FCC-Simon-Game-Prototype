@@ -59,40 +59,6 @@ strict1.on("click", function() {
 });
 
 
-function colorHandler(color) {
-
-    var background;
-
-    if (color == 'red') {
-        var jcolor = red;
-        color = "#8B0000";
-        background = "red";
-        redAudio.play();
-    } else if (color == 'yellow') {
-        var jcolor = yellow;
-        background = "#FFD700";
-        yellowAudio.play();
-    } else if (color == 'blue') {
-        var jcolor = blue;
-        background = "#1E90FF";
-        blueAudio.play();
-    } else {
-        var jcolor = green;
-        greenAudio.play();
-        background = "#00FF00";
-    }
-
-    //background is background, not black
-    jcolor.css("background-color", 'black');
-
-    jcolor.delay(1000).queue(function(next) {
-        jcolor.css("background-color", color);
-        next();
-    });
-
-
-}
-
 
 
 

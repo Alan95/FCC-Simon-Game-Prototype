@@ -41,6 +41,7 @@ const gameRunner = () => {
     }
 
     showingColours();
+    //Breakpoint 2.7
     maxColor++;
     ux = 0;
 
@@ -52,23 +53,34 @@ const gameRunner = () => {
 
 }
 
+const colorEffects = (thatColor) => {
+
+  $("." + thatColor).css("background-color", 'black');
+  $("." + thatColor).delay(1000).queue((next) => {
+      $("." + thatColor).css("background-color", thatColor);
+      next();
+  });
+
+}
+
+const colorSound = (color) => {
+
+    if (color == 'red') {
+        redAudio.play();
+    } else if (color == 'yellow') {
+        yellowAudio.play();
+    } else if (color == 'blue') {
+        blueAudio.play();
+    } else {
+        greenAudio.play();
+    }
+
+    colorEffects(color);
+}
+
 
 
 
 const showingColours = () => {
-
-  setTimeout(() => {
-    gameArray.forEach(colorEvent);
-  }, 1500);
-
-
-    /*let currentColor = gameArray[counter];
-    if (counter < gameArray.length) {
-        setTimeout(function() {
-            colorEvent(currentColor);
-            counter++;
-            starting(counter);
-        }, 1500);
-    }*/
-
+  gameArray.forEach(colorSound);
 }
